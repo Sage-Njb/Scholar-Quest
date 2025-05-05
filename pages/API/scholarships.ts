@@ -1,0 +1,13 @@
+// pages/api/scholarships.ts
+import { supabase } from '../../lib/supabase';
+
+export default async function handler(req, res) {
+  try {
+    // Fetch all scholarships from Supabase
+    const { data, error } = await supabase.from('scholarships').select('*');
+    if (error) throw error;
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
